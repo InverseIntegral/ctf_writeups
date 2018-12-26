@@ -54,7 +54,7 @@ The PDF contained a file named `teaser.pls`. The file contains wrapped PL/SQL co
 source code but it can easily be reverted.  Using this [tool](https://codecrete.net/UnwrapIt/)reveals the unwrapped
 source code. The function takes a flag as a parameter and checks if it's valid.
 
-```
+```sql
 FUNCTION checkHV18teaser(FLAG VARCHAR2) RETURN NUMBER IS
 	A VARCHAR2(4);
 	B NUMBER(10);
@@ -144,7 +144,7 @@ was only one character. The ZIP file contains another password protected ZIP fil
 I wrote a small Java program that bruteforces the one character passwords. Inside the password was a flag and the final
 zip file contained a file named `xenon.elf`.
 
-```
+```java
 private static final List<String> alphabet = Arrays.asList(" .abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890-,".split(""));
 
 public static void main(String[] args) throws ZipException {
@@ -226,7 +226,7 @@ stb r7, 1(r10)
 
 I translated them to pseudocode:
 
-```
+```c
 for (int i = 0; i < 16; i += 2) {
     r7 = 8 * (7 - (i / 2));
 
