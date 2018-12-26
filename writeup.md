@@ -804,7 +804,8 @@ the byte array `b` of the class. So what we have here are bytes of the java clas
 the effective classes that are loaded at runtime.
 
 The decoded EvilEvent class contains this Java code:
-```
+
+```java
 public class EvilEvent {
     private static byte[] b = new byte[]{-83, 8, 119, 19, 73, 17, 2, 83, 126, 17, 33, 119, 115, 6, 38, 16, 26, 23, 10, 127, 20, 85, 81, 47, 13, 88, 43, 0, 70, 27, -122, 8, 83, 17, 125, 46, 78, 64, 89, 78, 41};
 
