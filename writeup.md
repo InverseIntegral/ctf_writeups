@@ -237,3 +237,112 @@ for (int i = 0; i < 16; i += 2) {
 
 This just intertwines the two fusekit values. The final key is therefore: `C00FFF0FFF0FFF0FFF0FFF0FFF0FFF0F`
 Now the ciphertext can be decripted.
+
+## Easy
+
+### Day 01: Just Another Bar Code
+
+Googling for "Just another bar code" we quickly find the [JAB Code](https://jabcode.org/). We decode the image and get
+the flag.
+
+### Day 02: Me
+
+In this challenge we get a sequence of numbers:
+```
+115 112 122 127 113 132 124 110 107 106 124 124 105 111 104 105 115 126 124 103 101 131 124 104 116 111 121 107 103 131
+124 104 115 122 123 127 115 132 132 122 115 64 132 103 101 132 132 122 115 64 132 103 101 131 114 113 116 121 121 107
+103 131 124 104 115 122 123 127 115 63 112 101 115 106 125 127 131 111 104 103 115 116 123 127 115 132 132 122 115 64
+132 103 101 132 132 122 115 64 132 103 101 131 114 103 115 116 123 107 113 111 104 102 115 122 126 107 127 111 104 103
+115 116 126 103 101 132 114 107 115 64 131 127 125 63 112 101 115 64 131 127 117 115 122 101 115 106 122 107 107 132 104
+106 105 102 123 127 115 132 132 122 116 112 127 123 101 131 114 104 115 122 124 124 105 62 102 101 115 106 122 107 107
+132 104 112 116 121 121 107 117 115 114 110 107 111 121 107 103 131 63 105 115 126 124 107 117 115 122 101 115 106 122
+107 113 132 124 110 107 106 124 124 105 111 104 102 115 122 123 127 115 132 132 122 115 64 132 103 101 131 114 103 115
+116 123 107 117 115 124 112 116 121 121 107 117 115 114 110 107 111 121 107 103 131 63 105 115 126 124 107 117 115 122
+101 115 106 122 107 107 132 104 106 105 102 121 127 105 132 114 107 115 64 131 127 117 115 122 101 115 112 122 127 111
+132 114 107 105 101 75 75 75 75 75 75
+```
+
+The `75`s at the end could be equal signs of a base64 encoding. When checking an ascii table we can see that `75` is the
+octal representation of =. Decoding the numbers gives us:
+
+```
+MJRWKZTHGFTTEIDEMVTCAYTDNIQGCYTDMRSWMZZRM4ZCAZZRM4ZCAYLKNQQGCYTDMRSWM3JAMFUWYIDCMNSWMZZRM4ZCAZZRM4ZCAYLCMNSGKIDBMRVGWIDCMNVCAZLGM4YWU3JAM4YWOMRAMFRGGZDFEBSWMZZRNJWSAYLDMRTTE2BAMFRGGZDJNQQGOMLHGIQGCY3EMVTGOMRAMFRGKZTHGFTTEIDBMRSWMZZRM4ZCAYLCMNSGOMTJNQQGOMLHGIQGCY3EMVTGOMRAMFRGGZDFEBQWEZLGM4YWOMRAMJRWIZLGEA======
+```
+
+Base64 doesn't seem to work so we try Base32 and get:
+
+```
+bcefg1g2 def bcj abcdefg1g2 g1g2 ajl abcdefm ail bcefg1g2 g1g2 abcde adjk bcj efg1jm g1g2 abcde efg1jm acdg2h abcdil
+g1g2 acdefg2 abefg1g2 adefg1g2 abcdg2il g1g2 acdefg2 abcde abefg1g2 bcdef
+```
+
+Using this [14 segment display scheme](http://kryptografie.de/kryptografie/chiffre/images/14-Segment.png) we can now decode
+the message and get the flag.
+
+### Day 03: Catch me
+
+In this challenge we have to catch a button but it always gets away when we get near it.
+Using the developer console we can simulate a button click and get the flag:
+
+```
+$('button').click()
+```
+
+### Day 04: pirating like in the 90ies
+
+In this challenge we have to find the correct numbers to get the flag.
+
+![](images/pirates.png)
+
+When searching for the names (Nebraska, Tortuga, Antigua, Jamaica, St.Kitts, Barbados, Montserrat) we come across "The
+Secret of Monkey Island". The early releases of this game came with a copy-protection in the form of a cardboard wheel.
+With this it was clear what we had to do.
+
+Using this [tool](https://www.oldgames.sk/docs/Dial-A-Pirate/) we had to align the upper and lower half of the head and
+then read from the correct name to get the number.
+
+### Day 05: OSINT 1
+
+The subtitle of this challenge was _It's all about transparency_. We had to check the certificate transparency logs. To
+do this I used [this site](https://transparencyreport.google.com/https/certificates) and entered `hackvent.org`. This
+revealed another subdomain `osintiscoolisntit.hackvent.org` which contained the flag.
+
+### Day 06: Mondrian
+
+In this challenge we get to see the art gallery of [Piet Mondrian](https://en.wikipedia.org/wiki/Piet_Mondrian).
+
+![](images/piet_gallery.png)
+
+Unfortunately he doesn't sell his artwork. But it turns out that the paintings are also valid programs written in the
+[Piet programming language](https://en.wikipedia.org/wiki/Esoteric_programming_language#Piet). Using the [npiet
+online interpreter](https://www.bertnase.de/npiet/npiet-execute.php) we can run the programs/paintings to get the flag.
+
+### Day 07: flappy.pl
+
+We get the following Perl code:
+
+```perl
+use Term::ReadKey; sub k {ReadKey(-1)}; ReadMode 3;
+sub rk {$Q='';$Q.=$QQ while($QQ=k());$Q}; $|=1;
+print "\ec\e[0;0r\e[4242;1H\e[6n\e[1;1H";
+($p .= $c) until (($c=k()) eq 'R'); $x=75;$dx=3;
+(($yy) = ($p =~ /(\d+);/))&&($yy-=10);
+print (("\r\n\e[40m\e[37m#".(' 'x78)."#")x100);
+$r=(sub {$M=shift; sub {$M=(($M*0x41C64E6D)+12345)&0x7FFFFFFF;$M%shift;}})
+->(42);$s=(sub {select($HV18, $faLL, $D33p, shift);});$INT0?$H3ll:$PERL;
+@HASH=unpack("C*",pack("H*",'73740c12387652487105575346620e6c55655e1b4b6b6f541a6b2d7275'));
+for $i(0..666){$s->(0.1);print("\e[40;91m\e[${yy};${x}H.");
+$dx += int(rk() =~ / /g)*2-1; $dx = ($dx>3?3:($dx<-3?-3:$dx));
+$x += $dx; ($x>1&&$x<80)||last;
+(($i%23)&&print ("\e[4242;1H\n\e[40m\e[37m#".(' 'x78)."#"))||
+(($h=20+$r->(42))&&(print ("\e[4242;1H\n\e[40m\e[37m#".
+((chr($HASH[$i/23]^$h))x($h-5)).(" "x10).((chr($HASH[$i/23]^$h))x(73-$h))."#")));
+(($i+13)%23)?42:((abs($x-$h)<6)||last);
+print ("\e[${yy};${x}H\e[41m\e[37m@");
+}; ReadMode 1;###################-EOF-flappy.pl###############
+```
+
+The code seems to use the variable $x for the height and $dx for the change in height (delta x). So this part seems
+important: `(abs($x-$h)<6)`. It checks if x is in the interval [h - 6; h + 6]. This is the collision detection of the
+game. If we change the 6 to a higher number we can fly through the walls.
+
