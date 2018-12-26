@@ -32,45 +32,27 @@ One of the images looks like an autostereogram. [This site](http://magiceye.ecks
 
 ### -7
 
-The pdf contained a file named `Q3RC.png`. After some searching I came across a [writeup](https://github.com/shiltemann/CTF-writeups-public/blob/master/Hackvent_2015/writeup.md#dec-17-santas-quick-response) of the 17th day of the HACKvent 2015.
+When using `binwalk -e teaser.pdf` we get several files. One file was named `Q3RC.png`. After some searching I came
+across a [writeup](https://github.com/shiltemann/CTF-writeups-public/blob/master/Hackvent_2015/writeup.md#dec-17-santas-quick-response)
+of the 17th day of the HACKvent 2015.
 
 So the QR code uses three bits as an encoding isntead of the normal two bits. With the help of the writeup I decoded the message by hand.
 
 ### -6
 
-The PDF contained a file named `old_school.jpg`. It showed a punchcard and had a small hint "IBM-029" on it.
-With the help of this
-[image](https://en.wikipedia.org/wiki/Keypunch#/media/File:Blue-punch-card-front-horiz_top-char-contrast-stretched.png)
-the decoding was quite easy.
+The PDF contained a file named `Santa.txt`. It states that Santa now uses encrypted communications and that the key is
+reindeer name. It was clear that it must be a transposition cipher because the ciphertext already contained the flag "structure".
+Using cryptool I tried a simple transposition with every name but that didn't work. Two names stood out "Donder" and
+"Blitzen". Those two were written in the german spelling. When trying a double permutation with those names we get the
+correct text and the flag.
+
+![](images/cryptool.png)
 
 ### -5
 
-This one was quite difficult to find. The command `unrar vta 39A25.rar`showed that one of the rar files of the PDF
-contained an NTFS alternate data stream. 
-```
-       Name: STM
-       Type: NTFS alternate data stream
-     Target: :quickresponse.txt
-       Size: 625
-Packed size: 142
-      Ratio: 22%
-      mtime: 2018-12-03 02:15:08,000000000
- Attributes: .B
-      CRC32: 993E3536
-    Host OS: Windows
-Compression: RAR 3.0(v29) -m3 -md=64K
-```
-
-Unpacking the rar on Windows and opening the data stream gives us a sequence of 0 and 1. The sequence has a length of
-625 characters so it's probably a 25x25 QR code. With the help of [this site](https://www.dcode.fr/binary-image) the QR code can be
-restored.
-
-### -4
-
-When using `binwalk -e teaser.pdf` we get several files. One of them was `teaser.pls`
-The file contains wrapped PL/SQL code. The wrapping is there to protect the source code but it can easily be reverted.
-Using this [tool](https://codecrete.net/UnwrapIt/)reveals the unwrapped source code. The function takes a flag as a
-parameter and checks if it's valid.
+The PDF contained a file named `teaser.pls`. The file contains wrapped PL/SQL code. The wrapping is there to protect the
+source code but it can easily be reverted.  Using this [tool](https://codecrete.net/UnwrapIt/)reveals the unwrapped
+source code. The function takes a flag as a parameter and checks if it's valid.
 
 ```
 FUNCTION checkHV18teaser(FLAG VARCHAR2) RETURN NUMBER IS
@@ -125,15 +107,34 @@ The fifth part of the flag is base64 encoded. When decoding it we get `F0m0`.
 Putting it all together we get the flag:
 HV18-7389-H0b0-H0DL-2969-F0m0
 
+### -4
+
+The PDF contained a file named `old_school.jpg`. It showed a punchcard and had a small hint "IBM-029" on it.  With the help of this
+[image](https://en.wikipedia.org/wiki/Keypunch#/media/File:Blue-punch-card-front-horiz_top-char-contrast-stretched.png)
+the decoding was quite easy.
+
 ### -3
 
-The PDF contained a file named `Santa.txt`. It states that Santa now uses encrypted communications and that the key is
-reindeer name. It was clear that it must be a transposition cipher because the ciphertext already contained the flag "structure".
-Using cryptool I tried a simple transposition with every name but that didn't work. Two names stood out "Donder" and
-"Blitzen". Those two were written in the german spelling. When trying a double permutation with those names we get the
-correct text and the flag.
+This one was quite difficult to find. The command `unrar vta 39A25.rar`showed that one of the RAR files hidden inside
+the PDF contained an NTFS alternate data stream. 
 
-![](images/cryptool.png)
+```
+       Name: STM
+       Type: NTFS alternate data stream
+     Target: :quickresponse.txt
+       Size: 625
+Packed size: 142
+      Ratio: 22%
+      mtime: 2018-12-03 02:15:08,000000000
+ Attributes: .B
+      CRC32: 993E3536
+    Host OS: Windows
+Compression: RAR 3.0(v29) -m3 -md=64K
+```
+
+Unpacking the rar on Windows and opening the data stream gives us a sequence of 0 and 1. The sequence has a length of
+625 characters so it's probably a 25x25 QR code. With the help of [this site](https://www.dcode.fr/binary-image) the QR code can be
+restored.
 
 ### -2
 
