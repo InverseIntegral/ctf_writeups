@@ -1292,9 +1292,9 @@ When looking at the blue pill we can see that it also encrypts a flag. We assume
 one of the red pill. From the blue pill we also learn that the flag is a PNG image. The first 32bit integer of the file
 that gets encrypted is compared to `1196314761` which is also the first value of the PNG header.
 
-The blue pill encrypts only the higher 4 bits of each byte.
+The blue pill encrypts only the higher 4 bits of each byte:
 
-```
+```c
 v8 = 0;
 while (v8 != numberOfBytesToWrite) {
     *(v7 + v8) = (v9[2 * v8 + 1] >> 4) | 16 * (v9[2 * v8] >> 4);
@@ -1304,7 +1304,7 @@ while (v8 != numberOfBytesToWrite) {
 
 The key is a constant value but the IV changes based on the current time:
 
-```
+```c
 RegCreateKeyExA(HKEY_CURRENT_USER, "SOFWARE\HACKvent2018", 0, 0, 0, 0x4001F, 0, &hkey, 0);
 RegQueryInfoKeyA(hkey, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, &FileTime);
 RegCloseKey(hkey);
@@ -1330,6 +1330,7 @@ bits of the PNG header bytes and for the blue pill we take the higher bits.
 
 To bruteforce the red pill I first wrote a Java program. It took extremly long to find the correct IV so I wrote a C
 program that solves the problem much faster:
+
 ```c
 FILE *fp;
 long size;
