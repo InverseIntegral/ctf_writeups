@@ -1517,7 +1517,8 @@ Similar to last years hidden challenge we had to use `telnet challenges.hackvent
 get a flag directly though. When looking at the snow animation we can see some characters flying by. We can write the
 telnet output to a file and read the password.
 
-Now we have to log into Santas FTP server and get the content of the `flag` file.
+The `challenges.hackvent.hacking-lab.com` host also runs an FTP server. With the password from before we can log into
+Santas FTP. From there we can download the file named `flag`.
 
 ### Hidden 2
 
