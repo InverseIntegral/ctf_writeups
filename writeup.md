@@ -48,14 +48,14 @@ The first image looks like Braille.
 
 When decoding it we get a bit.ly link.
 The QR code on the website says "rushed by ...". So we must have missed something.
-When going back to the bit.ly link there are two redirects happening. The first Location contains
-`https://hackvent.hacking-lab.com/T34s3r_MMXVIII/index.php?flag=UI18-GAUa-lXhq-htyV-w2Wr-0yiV`
+When going back to the bit.ly link there are two redirects happening. The first Location header contains
+`https://hackvent.hacking-lab.com/T34s3r_MMXVIII/index.php?flag=UI18-GAUa-lXhq-htyV-w2Wr-0yiV`.
 ROT13 decoding the flag parameters gives the first flag.
 
 ### -9
 
 When entering the flag -10 as parameter in the previous link we get a PDF.
-Using `pdftotext`we get a morse code
+Using `pdftotext`we get a morse code:
 
 ```
 .... ...- .---- ---.. -....- --. --- .-. .. -....- --.. .-. ... -... -....- ..- ..-. .- . -....- - ... -.... -.-. -....- -.-. ...- - -
