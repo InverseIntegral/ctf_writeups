@@ -1251,8 +1251,8 @@ uses some constants and a quick search shows that it's an implementation of the 
 cipher](https://en.wikipedia.org/wiki/Rabbit_(cipher)).
 
 When looking at the blue pill we can see that it also encrypts a flag. We assume that it must be the same flag as the
-one of the red pill. From the blue pill we also learn that the flag is a png image. The first 32bit integer of the file
-that gets encrypted is compared to `1196314761`
+one of the red pill. From the blue pill we also learn that the flag is a PNG image. The first 32bit integer of the file
+that gets encrypted is compared to `1196314761` which is also the first value of the PNG header.
 
 The blue pill encrypts only the higher 4 bits of each byte.
 
@@ -1285,6 +1285,10 @@ converted into a [SYSTEMTIME](https://msdn.microsoft.com/en-us/library/windows/d
 back to a FILETIME. In this process the lowest four digits get set to zero because the SYSTEMTIME only saves
 milliseconds whereas the FILETIME saves the time in 100 nanosecond steps. This fact allows us to bruteforce the IV of
 the blue pill much faster.
+
+We now know how the IVs get created, what the keys are and that the flag must be a PNG image. Now we're able to
+bruteforce the correct IVs by comparing the decrypted content to the PNG headers. For the red pill we take the lower
+bits of the PNG header bytes and for the blue pill we take the higher bits.
 
 To bruteforce the red pill I first wrote a Java program. It took extremly long to find the correct IV so I wrote a C
 program that solves the problem much faster:
@@ -1419,7 +1423,7 @@ while (true) {
 }
 ```
 
-Now we have all the parts that we need to get the flag:
+Now we have all the parts that we need to reassemble the flag:
 
 ```java
 byte[] blueIV = new byte[]{ 0x10, 0x71, (byte) 0xEF, (byte) 0xFE, (byte) 0xC3, 0x6E, (byte) 0xD4, 0x01 };
