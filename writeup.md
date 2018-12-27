@@ -662,6 +662,9 @@ This calls the decrypt function where x19 is passed as the first parameter. In t
 The relevant instructions for this are:
 
 ```
+0x10000657c      adr x8, str.uQA___nM__1wl  ; 0x100007efa
+0x100006584      ldr q0, [x8] 
+0x100006588      str q0, [sp]
 0x10000658c      mov x0, sp
 0x100006590      bl sym.imp.strlen
 0x100006594      cbz x0, 0x1000065d8
@@ -683,7 +686,7 @@ The relevant instructions for this are:
 0x1000065d4      b.hi 0x1000065b8
 ```
 
-`sp` is the encrypted string. We can find the encrypted data by going to the address `s 0x100007efa` and printing a hex dump `x`:
+`sp` points to the encrypted string. We can find the encrypted data by going to the address `s 0x100007efa` and printing a hex dump `x`:
 
 ```
 0x100007efa  7551 415c 2d6e 4d40 3d31 776c 1e62 4e21  uQA\-nM@=1wl.bN! 
