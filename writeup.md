@@ -1325,7 +1325,12 @@ This takes the time when the register got created and saves it as a
 converted into a [SYSTEMTIME](https://msdn.microsoft.com/en-us/library/windows/desktop/ms724950(v=vs.85).aspx) and then
 back to a FILETIME. In this process the lowest four digits get set to zero because the SYSTEMTIME only saves
 milliseconds whereas the FILETIME saves the time in 100 nanosecond steps. This fact allows us to bruteforce the IV of
-the blue pill much faster.
+the blue pill much faster. We can get the FILETIME of the encrypted flag with the following PowerShell script:
+
+```powershell
+
+(Get-ChildItem .\flag_encrypted).CreationTime.ToFileTime()
+```
 
 We now know how the IVs get created, what the keys are and that the flag must be a PNG image. Now we're able to
 bruteforce the correct IVs by comparing the decrypted content to the PNG headers. For the red pill we take the lower
@@ -1423,7 +1428,7 @@ To bruteforce the blue IV I wrote a small Java program:
 byte[] blueKey = new byte[]{(byte) 0x87, 0x05, (byte) 0x89, (byte) 0xCD, (byte) 0xA8, 0x75, 0x62, (byte) 0xEF, 0x38, 0x45, (byte) 0xFF, (byte) 0xD1, 0x41, 0x37, 0x54, (byte) 0xD5};
 byte[] pngHigherHeader = new byte[]{0x8, 0x5, 0x4, 0x4, 0x0, 0x0, 0x1, 0x0};
 
-byte[] cipherText = Files.readAllBytes(new File("flag_encrypted_blue").toPath());
+byte[] cipherText = Files.readAllBytes(new File("flag_encrypted").toPath());
 BigInteger initial = new BigInteger("131852077180000000");
 
 outer:
