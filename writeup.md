@@ -605,7 +605,7 @@ realized that it's possible to inject SQL by changing the first/lastname in Tele
 Changing the name to `'UNION SELECT table_name, 1 FROM information_schema.tables #` revealed the `SecretStore` table.
 Now we can just select the flag from this table by changing the name to `'UNION SELECT flag, 1 FROM SecretStore #`.
 
-![](/images/telegram.png)
+![](images/telegram.png)
 
 
 ### Day 13: flappy's revenge
