@@ -1,5 +1,7 @@
 # HACKvent 2018
 
+#### Teaser Challenges
+
 [-10](#-10) <br />
 [-9](#-9) <br />
 [-8](#-8) <br />
@@ -9,7 +11,10 @@
 [-4](#-4) <br />
 [-3](#-3) <br />
 [-2](#-2) <br />
-[-1](#-1) <br />
+[-1](#-1)
+
+#### Easy Challenges
+
 [Day 01: Just Another Bar Code](#day-01-just-another-bar-code) <br />
 [Day 02: Me](#day-02-me) <br />
 [Day 03: Catch me](#day-03-catch-me) <br />
@@ -17,13 +22,19 @@
 [Day 05: OSINT 1](#day-05-osint-1) <br />
 [Day 06: Mondrian](#day-06-mondrian) <br />
 [Day 07: flappy.pl](#day-07-flappypl) <br />
+
+#### Medium Challenges
+
 [Day 08: Advent Snail](#day-08-advent-snail) <br />
 [Day 09: fake xmass balls](#day-09-fake-xmass-balls) <br />
 [Day 10: >_ Run, Node, Run](#day-10-_-run-node-run) <br />
 [Day 11: Crypt-o-Math 3.0](#day-11-crypt-o-math-30) <br />
 [Day 12: SmartWishList](#day-12-smartwishlist) <br />
 [Day 13: flappy's revenge](#day-13-flappys-revenge) <br />
-[Day 14: power in the shell](#day-14-power-in-the-shell) <br />
+[Day 14: power in the shell](#day-14-power-in-the-shell)
+
+#### Hard Challenges
+
 [Day 15: Watch Me](#day-15-watch-me) <br />
 [Day 16: Pay 100 Bitcoins](#day-16-pay-100-bitcoins) <br />
 [Day 17: Faster KEy Exchange](#day-17-faster-key-exchange) <br />
@@ -33,7 +44,13 @@
 [Day 21: muffinCTF](#day-21-muffinctf) <br />
 [Day 22: muffinCTF](#day-22-muffinctf) <br />
 [Day 23: muffinCTF](#day-23-muffinctf) <br />
-[Day 24: Take the red pill, take the blue pill](#day-24-take-the-red-pill-take-the-blue-pill) <br />
+
+#### Final Challenge
+
+[Day 24: Take the red pill, take the blue pill](#day-24-take-the-red-pill-take-the-blue-pill)
+
+#### Hidden Challenges
+
 [Hidden 1](#hidden-1) <br />
 [Hidden 2](#hidden-2) <br />
 [Hidden 3](#hidden-3)
@@ -618,6 +635,8 @@ equation solver](https://www.alpertron.com.ar/QUADMOD.HTM) this equation can be 
 ![](images/powershell.png)
 
 The third solution gives us the correct flag when decoded to ASCII.
+
+## Hard
 
 ### Day 15: Watch Me
 
