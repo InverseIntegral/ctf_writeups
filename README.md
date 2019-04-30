@@ -1,3 +1,5 @@
-# HACKvent 2018 Writeup
+# CTF Writeups
 
-This repository contains [a writeup of the HACKvent 2018](writeup.md).
+This repository contains CTF writeups.
+
+- [HACKvent 2018](hackvent_2018/writeup.md)
