@@ -37,7 +37,7 @@ def takenoko(X, Y):
     return W
 ```
 
-Since Here we can see that either `m2` is multiplied with `mat` or vice-versa.
+Here we can see that either `m2` is multiplied with `mat` or vice-versa.
 Note that matrix multiplication is not commutative.
 
 ```python
@@ -49,7 +49,7 @@ else:
 ```
 
 The encrypted flag is 100 characters long so we know that there must be two matrix multiplications happening. To undo
-the multiplication we simply have to solve `M2 * Mat = R` for `Mat`.
+the multiplication we simply have to solve `M2 * Mat = R` for `Mat` in the finite field `GF(251)`.
 
 ```python
 from sage.all import *
