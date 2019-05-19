@@ -3,5 +3,5 @@
 - [ONCE UPON A TIME](once_upon_a_time/)
 - [Encode & Encode](encode_encode/)
 - [show me your private key](show_me_your_private_key/)
-- [\[a-z().\]](a-z().)
+- [\[a-z().\]](a-z)
 - [Avatar Uploader](avatar_uploader/)
