@@ -52,19 +52,21 @@ elliptic curve `(Cx, Cy)`:
 b = (pow(Cy, 2, n) - pow(Cx, 3, n)) % n
 ```
 
-Now we have to find the inverse for `e` in `E_n(0, b)` to get `(Gx, Gy)`. To do so we can use [this
+The elliptic curve `EC` is defined over the ring `Z/nZ`. Such a curve has some important properties [[0]](https://eprint.iacr.org/2017/1077.pdf#subsection.2.2).
+
+To get `(Gx, Gy)` we have to find the inverse of `e` in `E_n(0, b)`. To do so we can use [this
 property](https://math.stackexchange.com/questions/348262/inverse-scalar-multiplication-of-a-point-over-elliptic-curve#answer-348269).
 We just need to find the cardinality of `E_n(0, b)`.
 
 The cardinality of `E_n(0, b)` can be calculated by multiplying the cardinality of 
-`Ep(0, b)` with `Eq(0, b)` where `n = p * q` and `p` and `q` are prime.
-[[1]](https://link.springer.com/content/pdf/10.1007/3-540-46766-1_20.pdf)
+`Ep(0, b)` with `Eq(0, b)` where `n = p * q` and `p` and `q` are prime
+[[1]](https://link.springer.com/content/pdf/10.1007/3-540-46766-1_20.pdf).
 
-Furthermore the cardinality of `Ep(0, b)` with `p = 3 mod 4` is simply `p + 1`.
-[[1]](https://link.springer.com/content/pdf/10.1007/3-540-46766-1_20.pdf)
+Furthermore the cardinality of `Ep(0, b)` with `p = 3 mod 4` is simply `p + 1`
+[[1]](https://link.springer.com/content/pdf/10.1007/3-540-46766-1_20.pdf).
 
 So the cardinality of `E_n(0, b)` is just `(p + 1) * (q + 1)`.
-With that the inverse for `e` can be calculated and `(Cx, Cy)` calculated.
+With that the inverse for `e` and `(Cx, Cy)` can be calculated.
 
 `p` and `q` can be calculated from the private key exponent `d` using [this Java
 program](https://stackoverflow.com/questions/2921406/calculate-primes-p-and-q-from-private-exponent-d-public-exponent-e-and-the#answer-28299742).
