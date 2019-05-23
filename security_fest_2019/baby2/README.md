@@ -9,7 +9,7 @@ File: [baby2](baby2), [libc.so.6](libc.so.6)
 This time the binary does not contains a `win` function. Assuming ASLR is enabled on the remote target, I first leaked a
 known address and calculated the offset.
 
-```
+```python
 from pwn import *
 
 isRemote = args['REMOTE']
