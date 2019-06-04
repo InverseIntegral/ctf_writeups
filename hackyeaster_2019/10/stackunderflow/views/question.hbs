@@ -1,0 +1,18 @@
+<main class="container">
+    <div class="card bg-light mb-3 mt-3">
+        <div class="card-body">
+            <p class="card-text">{{question.question}}</p>
+            <p class="card-text"><small class="text-muted">Asked by
+                <span class="{{#eq question.asked_by 'the_admin'}}text-danger{{/eq}}">{{question.asked_by}}</span>
+            </small></p>
+        </div>
+    </div>
+
+    {{#each question.answers}}
+        <div class="card mt-2">
+            <div class="card-body">
+                {{this}}
+            </div>
+        </div>
+    {{/each}}
+</main>

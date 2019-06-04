@@ -1,0 +1,12 @@
+{
+  "name": "egg_storage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "binaryen": "^59.0.0"
+  }
+}

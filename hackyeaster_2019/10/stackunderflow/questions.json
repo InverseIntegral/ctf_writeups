@@ -1,0 +1,38 @@
+[
+  {
+    "question": "How do I undo the most recent commits in Git?",
+    "asked_by": "no_one",
+    "answers": ["Use git revert --no-edit HEAD", "Try this command: git reset --soft HEAD~1"]
+  },
+  {
+    "question": "What is the correct JSON content type?",
+    "asked_by": "no_one",
+    "answers": ["For JSON text it's application/json", "Don't use JSON, XML is much better!!1"]
+  },
+  {
+    "question": "How to modify existing, unpushed commits?",
+    "asked_by": "null",
+    "answers": []
+  },
+  {
+    "question": "Is Java “pass-by-reference” or “pass-by-value”?",
+    "asked_by": "the_bean",
+    "answers": []
+  },
+  {
+    "question": "Does Python have a ternary conditional operator?",
+    "asked_by": "hax0r",
+    "answers": []
+  },
+  {
+    "question": "Which NoSQL database do you use?",
+    "asked_by": "the_admin",
+    "answers": ["Depends on the use case. Try Redis, Neo4J, Couchbase, Cassandra or MongoDB just to name a few.", "Why not a normal SQL database?"]
+  },
+  {
+    "question": "Should my password really be the flag?",
+    "asked_by": "null",
+    "hidden": true,
+    "answers": ["No, I think we should change it.", "Let's do it after the migration!", "The migration is done but the password is still the same..."]
+  }
+]

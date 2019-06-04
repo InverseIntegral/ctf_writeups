@@ -1,0 +1,23 @@
+_BYTE *__fastcall hash(unsigned int *a1)
+{
+  unsigned int v2; // [rsp+4Ch] [rbp-14h]
+  _BYTE *v3; // [rsp+50h] [rbp-10h]
+  signed int j; // [rsp+58h] [rbp-8h]
+  int i; // [rsp+5Ch] [rbp-4h]
+
+  v3 = malloc(0x34DuLL);
+  v2 = strlen((const char *)a1) - 1;
+  for ( i = 0; (unsigned __int64)i <= 0xD2; ++i )
+  {
+    for ( j = 0; j <= 3; ++j )
+      v3[4 * i + j] = *((_BYTE *)a1 + (4 * i + j) % v2);
+    *(_DWORD *)&v3[4 * i] = -403835911
+                          - ((271733878
+                            - ((-271733879 - (*(_DWORD *)&v3[4 * i] & data[i]) + 271733878) & data[i])
+                            - 271733879) & (-1732584194
+                                          - ((1732584193 - (*(_DWORD *)&v3[4 * i] & data[i]) - 1732584194) & *(_DWORD *)&v3[4 * i])
+                                          + 1732584193))
+                          + 403835910;
+  }
+  return v3;
+}

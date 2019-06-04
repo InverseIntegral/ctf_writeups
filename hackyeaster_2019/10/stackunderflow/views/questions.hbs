@@ -1,0 +1,9 @@
+<main class="container">
+    <div class="list-group mt-3">
+        {{#each questions}}
+            <a href='questions/{{_id}}' class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {{#if hidden}}list-group-item-warning{{/if}}">{{question}}
+                <span class="badge badge-primary badge-pill">{{answers.length}} Answers</span>
+            </a>
+        {{/each}}
+    </div>
+</main>
