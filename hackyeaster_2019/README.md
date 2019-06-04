@@ -35,7 +35,7 @@
 [23 - The Maze](23/) <br />
 [24 - CAPTEG](24/)
 
-#### Hidden Challenges
+## Hidden Challenges
 
 [25 - Hidden Egg 1](25/) <br />
 [26 - Hidden Egg 2](26/) <br />
