@@ -37,7 +37,7 @@ v3[4 * i] = -403835911
                       + 403835910;
 ```
 
-This can be simplified significantly. To do this we have to realize that the subtactions result in -1:
+This can be simplified significantly. To do this we have to realize that the subtractions result in -1:
 
 ```c
 int d = data[i];
