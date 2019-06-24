@@ -6,3 +6,4 @@ This repository contains CTF writeups.
 - [Harekaze CTF 2019](harekaze_2019/)
 - [Security Fest CTF 2019](security_fest_2019/)
 - [Hacky Easter 2019](hackyeaster_2019/)
+- [Google CTF 2019](google_2019/)
