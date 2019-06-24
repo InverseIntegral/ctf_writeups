@@ -10,7 +10,7 @@ Go forth and attain greater access to reach this creature!
 
 ## Solution
 
-Adding the cookie with key `auth` and value `TUtb9PPA9cYkfcVQWYzxy4XbtyL3VNKz` from the [previous challenge](). Reveals
+Adding the cookie with key `auth` and value `TUtb9PPA9cYkfcVQWYzxy4XbtyL3VNKz` from the [previous challenge](../cookie_world_order/). Reveals
 a new hidden admin link. Following that link reveals the **Camera Controls** menue option. [Accessing
 it](https://cwo-xss.web.ctfcompetition.com/admin/controls) says `Requests only accepted from 127.0.0.1`. We have to
 visit this site locally.
