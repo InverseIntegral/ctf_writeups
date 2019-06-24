@@ -15,7 +15,7 @@ Go forth and attain greater access to reach this creature!
 From the URL we can already guess that this challenge is about XSS. It turns out that the chat on the right side of the
 website is vulnerable to XSS.
 
-However, the script from the [last challenge](../government_agriculture_network../README.md) does not work here because
+However, the script from the [last challenge](../government_agriculture_network/README.md) does not work here because
 there is some rudimentary protection. The keywords `script` and `alert` seem to be banned. To circumvent this protection HTML
 encoding can be used. Encoding
 
