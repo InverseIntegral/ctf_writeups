@@ -5,6 +5,7 @@ This repository contains a few CTF writeups.
 ## 2022
 
 - [Insomnihack 2022](insomni_2022/)
+- [DiceCTF 2022](dice_2022/)
 
 ## 2021
 
