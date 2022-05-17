@@ -1,4 +1,4 @@
-# Snoopy
+# Leds
 
 ## Description
 Level: medium<br/>

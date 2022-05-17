@@ -1,4 +1,4 @@
-# Ghost in a Shell 3
+# Jupiter One
 
 ## Description
 Level: easy<br/>

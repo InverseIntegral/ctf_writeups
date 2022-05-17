@@ -7,6 +7,7 @@ This repository contains a few CTF writeups.
 - [Insomnihack 2022](insomni_2022/)
 - [DiceCTF 2022](dice_2022/)
 - [Foobar CTF 2022](foobar_2022/)
+- [Hacky Easter 2022](hackyeaster_2022/)
 
 ## 2021
 
