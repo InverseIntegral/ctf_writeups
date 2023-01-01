@@ -8,6 +8,7 @@ This repository contains a few CTF writeups.
 - [DiceCTF 2022](dice_2022/)
 - [Foobar CTF 2022](foobar_2022/)
 - [Hacky Easter 2022](hackyeaster_2022/)
+- [HACKvent 2022](hackvent_2022/)
 
 ## 2021
 
