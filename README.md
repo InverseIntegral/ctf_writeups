@@ -2,6 +2,10 @@
 
 This repository contains a few CTF writeups.
 
+## 2023
+
+- [HACKvent 2023](hackvent_2023/)
+
 ## 2022
 
 - [Insomnihack 2022](insomni_2022/)
